@@ -24,5 +24,5 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag anitachoen/repotest:$(date +%s)
 
-    - name: Docker Push
-      run: docker push anitachoen/repotest
+    - name: Docker Push 
+      run: docker push $DOCKER_USER/repotest:${{ steps.date.outputs.date }}
