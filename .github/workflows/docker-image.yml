@@ -25,4 +25,4 @@ jobs:
       run: docker build . --file Dockerfile --tag anitachoen/repotest:$(date +%s)
 
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/repotest:tagname
+      run: docker push anitachoen/repotest
