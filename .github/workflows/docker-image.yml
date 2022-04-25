@@ -16,13 +16,13 @@ jobs:
     - uses: actions/checkout@v3
     - name: docker login
       env:
-        DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB.USERNAME}}
-        DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB.TOKEN}}
+        DOCKER_USER: ${{secrets.DOCKER.USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER.PASSWORD}}
       run: |
-        docker login -u $DOCKERHUB.USERNAME -p DOCKERHUB.TOKEN
+        docker login -u $DOCKER.USER -p DOCKER.PASSWORD
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
     - name: Docker Push
-      run: docker push ${{secrets.DOCKERHUB.USERNAME}}/repotest
+      run: docker push ${{secrets.DOCKER.USER}}/repotest
