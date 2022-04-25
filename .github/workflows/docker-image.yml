@@ -19,7 +19,7 @@ jobs:
         DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB.USERNAME}}
         DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB.TOKEN}}
       run: |
-        docker login -u $DOCKER.USER -p DOCKERHUB.TOKEN
+        docker login -u $DOCKERHUB.USERNAME -p DOCKERHUB.TOKEN
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
