@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: docker login
+      env:
+        DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB.USERNAME}}
+        DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB.TOKEN}}
+      run: |
+        docker login -u $DOCKER.USER -p DOCKERHUB.TOKEN
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Docker Push
+      run: docker push ${{secrets.DOCKERHUB.USERNAME}}/repotest
